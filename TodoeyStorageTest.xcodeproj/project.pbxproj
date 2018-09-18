@@ -60,7 +60,7 @@
 				E4D5CDEB2150090D00EAFAD7 /* Controllers */,
 				E4D5CDEC2150091500EAFAD7 /* Models */,
 				E4D5CDED2150092300EAFAD7 /* Views */,
-				E413C1B6214FF3F50096B8C0 /* Main.storyboard */,
+				E413C1BB214FF3F70096B8C0 /* LaunchScreen.storyboard */,
 				E413C1B9214FF3F70096B8C0 /* Assets.xcassets */,
 				E413C1BE214FF3F70096B8C0 /* Info.plist */,
 			);
@@ -86,7 +86,7 @@
 		E4D5CDED2150092300EAFAD7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E413C1BB214FF3F70096B8C0 /* LaunchScreen.storyboard */,
+				E413C1B6214FF3F50096B8C0 /* Main.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";

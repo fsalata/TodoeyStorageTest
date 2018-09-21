@@ -7,5 +7,6 @@ target 'TodoeyStorageTest' do
 
   pod 'RealmSwift'
   pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'develop'
+  pod 'ChameleonFramework'
 
 end

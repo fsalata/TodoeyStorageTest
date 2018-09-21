@@ -8,8 +8,11 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class ToDoListViewController: SwipeTableViewController {
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var todoItems: Results<Item>?
     
@@ -23,8 +26,36 @@ class ToDoListViewController: SwipeTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        tableView.rowHeight = 80.0
+        if let category = selectedCategory {
+            title = category.name
+            
+            updateNavbar(withHexColor: category.color)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateNavbar(withHexColor: "1D9Bf6")
+    }
+    
+    func updateNavbar(withHexColor hexColor: String?) {
+        guard let navBar = navigationController?.navigationBar else {
+            fatalError("Navigation controller does not exist")
+        }
+        
+        guard let color = UIColor(hexString: hexColor) else { fatalError() }
+        
+        navBar.barTintColor = color
+        navBar.tintColor = UIColor(contrastingBlackOrWhiteColorOn:color, isFlat:true)
+        navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(contrastingBlackOrWhiteColorOn:color, isFlat:true)]
+        
+        searchBar.barTintColor = color
     }
     
     //MARK - TableView Datasource Methods
@@ -39,6 +70,11 @@ class ToDoListViewController: SwipeTableViewController {
         if let item = todoItems?[indexPath.row] {
             cell.textLabel?.text = item.title
             cell.accessoryType = item.done ? .checkmark : .none
+            
+            if let color = UIColor(hexString: selectedCategory?.color).darken(byPercentage: CGFloat(indexPath.row) / CGFloat(todoItems!.count)) {
+                cell.backgroundColor = color
+                cell.textLabel?.textColor = UIColor(contrastingBlackOrWhiteColorOn:color, isFlat:true)
+            }
         }
         else {
             cell.textLabel?.text = "No item added yet"
